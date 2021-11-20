@@ -58,11 +58,8 @@ contract SwitchForMoney
 
     function AmountToEnable(string calldata id) public view returns (int256)
     {
-        require(switches[id].isValid, "Switch with specified id not found");
-        if (switches[id].diff > 0)
-            return 0;
-        
-        return -switches[id].diff - 1;
+        if (IsOn(id)) return 0;
+        return -switches[id].diff + 1;
     }
 
     function TransferOwnership(address payable newOwner) public
