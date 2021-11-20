@@ -8,7 +8,7 @@ contract SwitchForMoney
     
     struct Switch {
       bool isValid;
-      int256  diff; // negative or zero means red, otherwise - green
+      int256  diff; // positive means on, otherwise - off
     }
     
     mapping (string => Switch) switches;
@@ -56,7 +56,7 @@ contract SwitchForMoney
         return switches[id].diff > 0;
     }
 
-    function amountToEnable(string calldata id) public view returns (int256)
+    function AmountToEnable(string calldata id) public view returns (int256)
     {
         require(switches[id].isValid, "Switch with specified id not found");
         if (switches[id].diff > 0)
@@ -65,7 +65,7 @@ contract SwitchForMoney
         return -switches[id].diff - 1;
     }
 
-    function transferOwnership(address payable newOwner) public
+    function TransferOwnership(address payable newOwner) public
     {
         require(msg.sender == owner, "Only owner is allowed to change switch ownership");
         owner = newOwner;
