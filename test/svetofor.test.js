@@ -1,7 +1,6 @@
 const { ethers } = require("hardhat");
 const { expect } = require("chai");
 const chai = require('chai');
-chai.use(require('chai-bignumber')());
 var BigNumber = require('bignumber.js');
 
 describe("Testing svetofor contract", function() {
