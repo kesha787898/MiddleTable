@@ -25,12 +25,12 @@
     "@nomiclabs/hardhat-etherscan": "^2.1.7",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "chai": "^4.3.4",
-    "chai-bignumber": "^3.0.0",
+    "chai-bignumber": "*",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.5.1",
     "hardhat": "^2.6.8"
   },
   "dependencies": {
-    "chai-bignumber": "^3.0.0"
+    "chai-bignumber": "*"
   }
 }
