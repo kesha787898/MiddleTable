@@ -62,7 +62,7 @@ contract SwitchForMoney
 
     function AmountToEnable(string calldata id) public view returns (int256)
     {
-        if (IsOn(id)) return 0;
+        if (!IsOn(id)) return 0;
         return -switches[id].diff + 1;
     }
     
