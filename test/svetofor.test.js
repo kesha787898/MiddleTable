@@ -1,5 +1,8 @@
 const { ethers } = require("hardhat");
 const { expect } = require("chai");
+const chai = require('chai');
+chai.use(require('chai-bignumber')());
+var BigNumber = require('bignumber.js');
 
 describe("Testing svetofor contract", function() {
   let svetoforContract;
@@ -50,17 +53,32 @@ describe("Testing svetofor contract", function() {
   it('Should switch on and off with remaining amount off funds', async function() {
     expect(await svetoforContract.IsOn('TestSwitch1')).to.be.equal(false);
     
+    // turn ON
     
+    let oldOwnerBalance = await svetoforContract.provider.getBalance(owner1.address);
+
     let amountToEnable = await svetoforContract.AmountToEnable('TestSwitch1');
     await expect(svetoforContract.connect(driver1).VoteOn('TestSwitch1', { value: amountToEnable }))
             .to.emit(svetoforContract, 'SwitchOn')
             .withArgs('TestSwitch1');
+
+    let newOwnerBalance = await svetoforContract.provider.getBalance(owner1.address);
+   
+    expect(new BigNumber(newOwnerBalance._hex).minus(new BigNumber(oldOwnerBalance._hex))).to.be.bignumber.equal(amountToEnable.toString());
     expect(await svetoforContract.IsOn('TestSwitch1')).to.be.equal(true);
+    
+    // turn OFF
+    
+    oldOwnerBalance = await svetoforContract.provider.getBalance(owner1.address);
     
     amountToDisable = await svetoforContract.AmountToDisable('TestSwitch1');
     await expect(svetoforContract.connect(driver2).VoteOff('TestSwitch1', { value: amountToDisable }))
             .to.emit(svetoforContract, 'SwitchOff')
             .withArgs('TestSwitch1');
+            
+    newOwnerBalance = await svetoforContract.provider.getBalance(owner1.address);
+    
+    expect(new BigNumber(newOwnerBalance._hex).minus(new BigNumber(oldOwnerBalance._hex))).to.be.bignumber.equal(amountToEnable.toString());
     expect(await svetoforContract.IsOn('TestSwitch1')).to.be.equal(false);
   });
   
