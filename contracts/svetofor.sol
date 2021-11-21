@@ -12,7 +12,8 @@ contract SwitchForMoney
     }
     
     mapping (string => Switch) switches;
-    
+    string[] keys;
+
     event NewSwitch(string id);
     event SwitchOn(string id);
     event SwitchOff(string id);
