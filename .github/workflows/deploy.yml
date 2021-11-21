@@ -1,15 +1,9 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Deploy
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
@@ -25,10 +19,11 @@ jobs:
         id: cache
         with:
           path: '**/node_modules'
-          key: yarn-v2-${{ hashFiles('package-lock.json') }}
+          key: yarn-v2-${{ hashFiles('**/yarn.lock') }}
           restore-keys: yarn-v2-
       - run: yarn
         if: steps.cache.outputs.cache-hit != 'true'
       - run: yarn hardhat test
+      - run: npx hardhat run scripts/deploy.js --network rinkeby
         env:
           FORCE_COLOR: 1
