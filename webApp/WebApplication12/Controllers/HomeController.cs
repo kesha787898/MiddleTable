@@ -48,6 +48,29 @@ namespace WebApplication12.Controllers
             return this.Json(isOn);
         }
 
+
+        public async Task<IActionResult> AmountToEnable(string key)
+        {
+            var web3 = new Web3("https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161");
+            Contract contract = web3.Eth.GetContract(this.configuration["Abi"], this.configuration["ContractAddress"]);
+
+            var AmountToEnable = contract.GetFunction("AmountToEnable");
+            int amountToPut = await AmountToEnable.CallAsync<int>(key);
+
+            return this.Json(amountToPut);
+        }
+
+        public async Task<IActionResult> AmountToDisable(string key)
+        {
+            var web3 = new Web3("https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161");
+            Contract contract = web3.Eth.GetContract(this.configuration["Abi"], this.configuration["ContractAddress"]);
+
+            var AmountToEnable = contract.GetFunction("AmountToDisable");
+            int amountToPut = await AmountToEnable.CallAsync<int>(key);
+
+            return this.Json(amountToPut);
+        }
+
         public async Task<IActionResult> Balance()
         {
             var web3 = new Web3("https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161");

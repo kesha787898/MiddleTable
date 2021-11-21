@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <_PublishTargetUrl>H:\WebApplication12\WebApplication12\bin\Release\net5.0\publish\</_PublishTargetUrl>
+    <History>True|2021-11-21T14:13:52.5504604Z;True|2021-11-21T16:55:18.9944368+03:00;True|2021-11-21T16:52:28.1118216+03:00;True|2021-11-21T16:49:13.5621524+03:00;True|2021-11-21T16:38:11.6182867+03:00;True|2021-11-21T15:25:39.6902850+03:00;True|2021-11-21T15:20:21.7520504+03:00;</History>
+  </PropertyGroup>
+</Project>
