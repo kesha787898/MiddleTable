@@ -89,7 +89,7 @@ describe("Testing svetofor contract", function() {
   it('Should return all keys', async function() {
     svetoforContract.CreateSwitch('TestSwitch2');
     svetoforContract.CreateSwitch('TestSwitch3');
-    expect(await svetoforContract.ListKeys()).to.be.equal(
+    expect(await svetoforContract.ListKeys()).to.deep.equal(
         [
             'TestSwitch1',
             'TestSwitch2',
