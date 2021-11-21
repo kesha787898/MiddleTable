@@ -63,6 +63,12 @@ contract SwitchForMoney
         if (IsOn(id)) return 0;
         return -switches[id].diff + 1;
     }
+    
+    function AmountToDisable(string calldata id) public view returns (int256)
+    {
+        if (!IsOn(id)) return 0;
+        return switches[id].diff;
+    }
 
     function TransferOwnership(address payable newOwner) public
     {
