@@ -9,6 +9,12 @@ async function main() {
     const token = await Token.deploy();
   
     console.log("Token address:", token.address);
+
+    // TODO: It fails without waiting
+    // await hre.run("verify:verify", {
+    //     address: token.address,
+    //     constructorArguments: [],
+    //   });
   }
   
   main()

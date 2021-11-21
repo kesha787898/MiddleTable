@@ -13,12 +13,20 @@ https://livecode.ado.me.uk/Home/Session/d547a464-4f1e-4178-a730-92292136381f
 
 https://rinkeby.etherscan.io/address/0x3c4801511fd9de03fbad7477b3428fd15310ce36  
 
-
-=======
+## Build
 
 Try running some of the following tasks:
 
 ```shell
 npx hardhat compile
 npx hardhat test
+```
+
+## Deploy
+
+To deploy and verify contract in Etherscan:
+
+```shell
+npx hardhat run scripts/deploy.js --network rinkeby
+npx hardhat verify --network rinkeby <contract address>
 ```
