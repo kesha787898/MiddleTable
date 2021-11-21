@@ -12,7 +12,8 @@ contract SwitchForMoney
     }
     
     mapping (string => Switch) switches;
-    
+    string[] keys;
+
     event NewSwitch(string id);
     event SwitchOn(string id);
     event SwitchOff(string id);
@@ -26,6 +27,7 @@ contract SwitchForMoney
         require(msg.sender == owner, "Only owner is allowed to create new switches.");
         require(switches[id].isValid == false, "Switch with specified id already exist. Try other id.");
         switches[id] = Switch(true, 0);
+        keys.push(id);
         emit NewSwitch(id);
     }
 
@@ -67,5 +69,9 @@ contract SwitchForMoney
         require(msg.sender == owner, "Only owner is allowed to change switch ownership");
         owner = newOwner;
     }
-}
 
+    function ListKeys() public view returns (string[] memory)
+    {
+        return keys;
+    }
+}
