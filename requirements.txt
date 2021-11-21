@@ -1,2 +1,3 @@
 web3~=5.25.0
 py-solc-x=1.1.1
+pygame

@@ -38,12 +38,12 @@ describe("Testing svetofor contract", function() {
   });
   
   it('Should fail VoteOn for non-existing switch', async function() {
-    await expect(svetoforContract.VoteOn('Non-Existing'))
+    await expect(svetoforContract.connect(driver1).VoteOn('Non-Existing'))
             .to.be.revertedWith("Switch with specified id not found");
   });
   
   it('Should fail VoteOff for non-existing switch', async function() {  
-    await expect(svetoforContract.VoteOff('Non-Existing'))
+    await expect(svetoforContract.connect(driver1).VoteOff('Non-Existing'))
             .to.be.revertedWith("Switch with specified id not found");
   });
   
@@ -52,13 +52,13 @@ describe("Testing svetofor contract", function() {
     
     
     let amountToEnable = await svetoforContract.AmountToEnable('TestSwitch1');
-    await expect(svetoforContract.VoteOn('TestSwitch1', { value: amountToEnable }))
+    await expect(svetoforContract.connect(driver1).VoteOn('TestSwitch1', { value: amountToEnable }))
             .to.emit(svetoforContract, 'SwitchOn')
             .withArgs('TestSwitch1');
     expect(await svetoforContract.IsOn('TestSwitch1')).to.be.equal(true);
     
     amountToDisable = await svetoforContract.AmountToDisable('TestSwitch1');
-    await expect(svetoforContract.VoteOff('TestSwitch1', { value: amountToDisable }))
+    await expect(svetoforContract.connect(driver2).VoteOff('TestSwitch1', { value: amountToDisable }))
             .to.emit(svetoforContract, 'SwitchOff')
             .withArgs('TestSwitch1');
     expect(await svetoforContract.IsOn('TestSwitch1')).to.be.equal(false);
